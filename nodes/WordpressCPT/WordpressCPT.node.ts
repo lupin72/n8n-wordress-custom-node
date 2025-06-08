@@ -14,6 +14,7 @@ import { cptFields, cptOperations } from './CptDescription';
 import type { ICpt } from './CptInterface';
 
 
+
 export class WordpressCpt implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Wordpress CTP',

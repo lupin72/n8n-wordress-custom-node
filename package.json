@@ -35,7 +35,7 @@
     "credentials": [
     ],
     "nodes": [
-      "dist/nodes/WordpressCPT/WordpressCPT.node.js"
+      "dist/nodes/WordpressCPT/WordpressCpt.node.js"
     ]
   },
   "devDependencies": {
