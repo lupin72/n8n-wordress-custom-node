@@ -1,15 +1,15 @@
 {
   "name": "n8n-nodes-wordpress-cpt",
   "version": "0.1.0",
-  "description": "",
+  "description": "n8n custom node to interact with WordPress Custom Post Types (CPTs).",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "Pier Gorelli",
+    "email": "me@piergorelli.com"
   },
   "repository": {
     "type": "git",

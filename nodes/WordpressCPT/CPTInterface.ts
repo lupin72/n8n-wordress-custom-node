@@ -1,4 +1,4 @@
-export interface ICPT {
+export interface ICpt {
 	author?: number;
 	id?: number;
 	title?: string;

@@ -65,7 +65,6 @@ export async function wordpressApiRequestAllItems(
 		responseData = await wordpressApiRequest.call(this, method, endpoint, body, query, undefined, {
 			resolveWithFullResponse: true,
 		});
-    this.logger.debug('Wordpress API Response', responseData);
 		returnData.push.apply(returnData, responseData.body as IDataObject[]);
 	} while (
 		responseData.headers['x-wp-totalpages'] !== undefined &&

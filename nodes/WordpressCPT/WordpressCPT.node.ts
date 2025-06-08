@@ -10,14 +10,14 @@ import type {
 import { NodeConnectionType } from 'n8n-workflow';
 
 import { wordpressApiRequest, wordpressApiRequestAllItems } from './GenericFunctions';
-import { cptFields, cptOperations } from './CPTDescription';
-import type { ICPT } from './CPTInterface';
+import { cptFields, cptOperations } from './CptDescription';
+import type { ICpt } from './CptInterface';
 
 
-export class WordpressCPT implements INodeType {
+export class WordpressCpt implements INodeType {
 	description: INodeTypeDescription = {
 		displayName: 'Wordpress CTP',
-		name: 'wordpress-cpt',
+		name: 'wordpressCpt',
 		icon: 'file:wordpress.svg',
 		group: ['output'],
 		version: 1,
@@ -131,7 +131,7 @@ export class WordpressCPT implements INodeType {
 					if (operation === 'create') {
 						const title = this.getNodeParameter('title', i) as string;
 						const additionalFields = this.getNodeParameter('additionalFields', i);
-						const body: ICPT = {
+						const body: ICpt = {
 							title,
 						};
 						if (additionalFields.authorId) {
@@ -180,7 +180,7 @@ export class WordpressCPT implements INodeType {
 					if (operation === 'update') {
 						const postId = this.getNodeParameter('postId', i) as string;
 						const updateFields = this.getNodeParameter('updateFields', i);
-						const body: ICPT = {
+						const body: ICpt = {
 							id: parseInt(postId, 10),
 						};
 						if (updateFields.authorId) {

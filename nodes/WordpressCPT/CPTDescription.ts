@@ -43,15 +43,15 @@ export const cptOperations: INodeProperties[] = [
 
 export const cptFields: INodeProperties[] = [
   {
-		displayName: 'Post Type',
+		displayName: 'Post Type Name or ID',
 		name: 'postType',
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getPostTypes',
 		},
 		required: true,
-		default: 'post',
-		description: 'The post type to work with (post, page, or any custom post type)',
+		default: '',
+		description: 'The post type to work with (post, page, or any custom post type). Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 	/* -------------------------------------------------------------------------- */
 	/*                                post:create                                 */
@@ -92,58 +92,18 @@ export const cptFields: INodeProperties[] = [
 				description:
 					'The ID for the author of the object. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
-			{
-				displayName: 'Content',
-				name: 'content',
-				type: 'string',
-				default: '',
-				description: 'The content for the post',
+      {
+				displayName: 'Category Names or IDs',
+				name: 'categories',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'getCategories',
+				},
+				default: [],
+				description:
+					'The terms assigned to the object in the category taxonomy. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
-			{
-				displayName: 'Slug',
-				name: 'slug',
-				type: 'string',
-				default: '',
-				description: 'An alphanumeric identifier for the object unique to its type',
-			},
-			{
-				displayName: 'Password',
-				name: 'password',
-				type: 'string',
-				typeOptions: { password: true },
-				default: '',
-				description: 'A password to protect access to the content and excerpt',
-			},
-			{
-				displayName: 'Status',
-				name: 'status',
-				type: 'options',
-				options: [
-					{
-						name: 'Draft',
-						value: 'draft',
-					},
-					{
-						name: 'Future',
-						value: 'future',
-					},
-					{
-						name: 'Pending',
-						value: 'pending',
-					},
-					{
-						name: 'Private',
-						value: 'private',
-					},
-					{
-						name: 'Publish',
-						value: 'publish',
-					},
-				],
-				default: 'draft',
-				description: 'A named status for the post',
-			},
-			{
+      {
 				displayName: 'Comment Status',
 				name: 'commentStatus',
 				type: 'options',
@@ -161,23 +121,13 @@ export const cptFields: INodeProperties[] = [
 				description: 'Whether or not comments are open on the post',
 			},
 			{
-				displayName: 'Ping Status',
-				name: 'pingStatus',
-				type: 'options',
-				options: [
-					{
-						name: 'Open',
-						value: 'open',
-					},
-					{
-						name: 'Close',
-						value: 'closed',
-					},
-				],
-				default: 'open',
-				description: 'If the a message should be send to announce the post',
+				displayName: 'Content',
+				name: 'content',
+				type: 'string',
+				default: '',
+				description: 'The content for the post',
 			},
-			{
+      {
 				displayName: 'Format',
 				name: 'format',
 				type: 'options',
@@ -226,23 +176,73 @@ export const cptFields: INodeProperties[] = [
 				default: 'standard',
 				description: 'Whether or not comments are open on the post',
 			},
+      {
+				displayName: 'Password',
+				name: 'password',
+				type: 'string',
+				typeOptions: { password: true },
+				default: '',
+				description: 'A password to protect access to the content and excerpt',
+			},
+      {
+				displayName: 'Ping Status',
+				name: 'pingStatus',
+				type: 'options',
+				options: [
+					{
+						name: 'Open',
+						value: 'open',
+					},
+					{
+						name: 'Close',
+						value: 'closed',
+					},
+				],
+				default: 'open',
+				description: 'If the a message should be send to announce the post',
+			},
+			{
+				displayName: 'Slug',
+				name: 'slug',
+				type: 'string',
+				default: '',
+				description: 'An alphanumeric identifier for the object unique to its type',
+			},
+			{
+				displayName: 'Status',
+				name: 'status',
+				type: 'options',
+				options: [
+					{
+						name: 'Draft',
+						value: 'draft',
+					},
+					{
+						name: 'Future',
+						value: 'future',
+					},
+					{
+						name: 'Pending',
+						value: 'pending',
+					},
+					{
+						name: 'Private',
+						value: 'private',
+					},
+					{
+						name: 'Publish',
+						value: 'publish',
+					},
+				],
+				default: 'draft',
+				description: 'A named status for the post',
+			},
 			{
 				displayName: 'Sticky',
 				name: 'sticky',
 				type: 'boolean',
 				default: false,
 				description: 'Whether or not the object should be treated as sticky',
-			},
-			{
-				displayName: 'Category Names or IDs',
-				name: 'categories',
-				type: 'multiOptions',
-				typeOptions: {
-					loadOptionsMethod: 'getCategories',
-				},
-				default: [],
-				description:
-					'The terms assigned to the object in the category taxonomy. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
 			{
 				displayName: 'Tag Names or IDs',
@@ -362,65 +362,18 @@ export const cptFields: INodeProperties[] = [
 				description:
 					'The ID for the author of the object. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
-			{
-				displayName: 'Title',
-				name: 'title',
-				type: 'string',
-				default: '',
-				description: 'The title for the post',
+      {
+				displayName: 'Category Names or IDs',
+				name: 'categories',
+				type: 'multiOptions',
+				typeOptions: {
+					loadOptionsMethod: 'getCategories',
+				},
+				default: [],
+				description:
+					'The terms assigned to the object in the category taxonomy. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
-			{
-				displayName: 'Content',
-				name: 'content',
-				type: 'string',
-				default: '',
-				description: 'The content for the post',
-			},
-			{
-				displayName: 'Slug',
-				name: 'slug',
-				type: 'string',
-				default: '',
-				description: 'An alphanumeric identifier for the object unique to its type',
-			},
-			{
-				displayName: 'Password',
-				name: 'password',
-				type: 'string',
-				typeOptions: { password: true },
-				default: '',
-				description: 'A password to protect access to the content and excerpt',
-			},
-			{
-				displayName: 'Status',
-				name: 'status',
-				type: 'options',
-				options: [
-					{
-						name: 'Draft',
-						value: 'draft',
-					},
-					{
-						name: 'Future',
-						value: 'future',
-					},
-					{
-						name: 'Pending',
-						value: 'pending',
-					},
-					{
-						name: 'Private',
-						value: 'private',
-					},
-					{
-						name: 'Publish',
-						value: 'publish',
-					},
-				],
-				default: 'draft',
-				description: 'A named status for the post',
-			},
-			{
+      {
 				displayName: 'Comment Status',
 				name: 'commentStatus',
 				type: 'options',
@@ -437,24 +390,14 @@ export const cptFields: INodeProperties[] = [
 				default: 'open',
 				description: 'Whether or not comments are open on the post',
 			},
-			{
-				displayName: 'Ping Status',
-				name: 'pingStatus',
-				type: 'options',
-				options: [
-					{
-						name: 'Open',
-						value: 'open',
-					},
-					{
-						name: 'Close',
-						value: 'closed',
-					},
-				],
-				default: 'open',
-				description: 'Whether or not comments are open on the post',
+      {
+				displayName: 'Content',
+				name: 'content',
+				type: 'string',
+				default: '',
+				description: 'The content for the post',
 			},
-			{
+      {
 				displayName: 'Format',
 				name: 'format',
 				type: 'options',
@@ -503,25 +446,75 @@ export const cptFields: INodeProperties[] = [
 				default: 'standard',
 				description: 'The format of the post',
 			},
-			{
+      {
+				displayName: 'Password',
+				name: 'password',
+				type: 'string',
+				typeOptions: { password: true },
+				default: '',
+				description: 'A password to protect access to the content and excerpt',
+			},
+      {
+				displayName: 'Ping Status',
+				name: 'pingStatus',
+				type: 'options',
+				options: [
+					{
+						name: 'Open',
+						value: 'open',
+					},
+					{
+						name: 'Close',
+						value: 'closed',
+					},
+				],
+				default: 'open',
+				description: 'Whether or not comments are open on the post',
+			},
+      {
+				displayName: 'Slug',
+				name: 'slug',
+				type: 'string',
+				default: '',
+				description: 'An alphanumeric identifier for the object unique to its type',
+			},
+      {
+				displayName: 'Status',
+				name: 'status',
+				type: 'options',
+				options: [
+					{
+						name: 'Draft',
+						value: 'draft',
+					},
+					{
+						name: 'Future',
+						value: 'future',
+					},
+					{
+						name: 'Pending',
+						value: 'pending',
+					},
+					{
+						name: 'Private',
+						value: 'private',
+					},
+					{
+						name: 'Publish',
+						value: 'publish',
+					},
+				],
+				default: 'draft',
+				description: 'A named status for the post',
+			},
+      {
 				displayName: 'Sticky',
 				name: 'sticky',
 				type: 'boolean',
 				default: false,
 				description: 'Whether or not the object should be treated as sticky',
 			},
-			{
-				displayName: 'Category Names or IDs',
-				name: 'categories',
-				type: 'multiOptions',
-				typeOptions: {
-					loadOptionsMethod: 'getCategories',
-				},
-				default: [],
-				description:
-					'The terms assigned to the object in the category taxonomy. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
-			},
-			{
+      {
 				displayName: 'Tag Names or IDs',
 				name: 'tags',
 				type: 'multiOptions',
@@ -532,7 +525,7 @@ export const cptFields: INodeProperties[] = [
 				description:
 					'The terms assigned to the object in the post_tag taxonomy. Choose from the list, or specify IDs using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 			},
-			{
+      {
 				displayName: 'Template',
 				name: 'postTemplate',
 				type: 'fixedCollection',
@@ -597,6 +590,13 @@ export const cptFields: INodeProperties[] = [
 						],
 					},
 				],
+			},
+			{
+				displayName: 'Title',
+				name: 'title',
+				type: 'string',
+				default: '',
+				description: 'The title for the post',
 			},
 		],
 	},
@@ -686,9 +686,8 @@ export const cptFields: INodeProperties[] = [
 		},
 		typeOptions: {
 			minValue: 1,
-			maxValue: 10,
 		},
-		default: 5,
+		default: 50,
 		description: 'Max number of results to return',
 	},
 	{
